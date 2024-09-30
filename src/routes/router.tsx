@@ -1,4 +1,5 @@
 import {
+  Navigate,
   RouterProvider,
   createBrowserRouter,
 } from 'react-router-dom';
@@ -52,8 +53,12 @@ const router = createBrowserRouter([
 	{
 	  path: '*',
 	  lazy: async () => {
-		const { NotFound } = await import('../pages/not-found/not-found');
-		return { Component: NotFound };
+		const isAuthenticated = localStorage.getItem('user-access-token') !== null;
+		if (isAuthenticated) {
+			return { Component: () => <Navigate to="/dashboard" /> };
+		} else {
+			return { Component: () => <Navigate to="/login" /> };
+		}
 	  },
 	}
 ]);

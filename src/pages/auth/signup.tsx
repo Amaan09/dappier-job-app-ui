@@ -1,4 +1,25 @@
+import { useForm, SubmitHandler } from "react-hook-form";
+import { NavLink, useNavigate } from "react-router-dom";
+import { signUp } from "../../api/auth-api";
+import { SignupRequest } from "../../domain";
+import { useAuth } from "../../routes/provider";
+
 export const Signup = () => {
+    const { setToken } = useAuth();
+    const navigate = useNavigate();
+
+    const { register, handleSubmit } = useForm<SignupRequest>();
+
+    const onSubmit: SubmitHandler<SignupRequest> = async (request) => {
+        try {
+            const response = await signUp(request);
+            setToken(response.accessToken);
+            navigate("/dashboard");
+        } catch (error) {
+            console.log(error);
+        }
+    };
+
     return (
         <>
             <div className="min-h-full flex flex-col justify-center py-12 sm:px-6 lg:px-8">
@@ -15,7 +36,10 @@ export const Signup = () => {
 
                 <div className="mt-8 sm:mx-auto sm:w-full sm:max-w-md">
                     <div className="bg-white py-8 px-4 shadow sm:rounded-lg sm:px-10">
-                        <form className="space-y-6" action="#" method="POST">
+                        <form
+                            className="space-y-6"
+                            onSubmit={handleSubmit(onSubmit)}
+                        >
                             <div>
                                 <label
                                     htmlFor="email"
@@ -25,6 +49,7 @@ export const Signup = () => {
                                 </label>
                                 <div className="mt-1">
                                     <input
+                                        {...register("email")}
                                         id="email"
                                         name="email"
                                         type="email"
@@ -44,6 +69,7 @@ export const Signup = () => {
                                 </label>
                                 <div className="mt-1">
                                     <input
+                                        {...register("name")}
                                         id="name"
                                         name="name"
                                         type="name"
@@ -63,6 +89,7 @@ export const Signup = () => {
                                 </label>
                                 <div className="mt-1">
                                     <input
+                                        {...register("password")}
                                         id="password"
                                         name="password"
                                         type="password"
@@ -82,9 +109,10 @@ export const Signup = () => {
                                 </label>
                                 <div className="mt-1">
                                     <input
+                                        {...register("confirmPassword")}
                                         id="confirmPassword"
                                         name="confirmPassword"
-                                        type="confirmPassword"
+                                        type="password"
                                         autoComplete="confirm-password"
                                         required
                                         className="appearance-none block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm placeholder-gray-400 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
@@ -95,12 +123,12 @@ export const Signup = () => {
                             <div className="flex items-center justify-center">
                                 <div className="text-sm">
                                     Have an account?&nbsp;
-                                    <a
-                                        href="#"
+                                    <NavLink
+                                        to="/login"
                                         className="font-medium text-indigo-600 hover:text-indigo-500"
                                     >
                                         Log in now
-                                    </a>
+                                    </NavLink>
                                 </div>
                             </div>
 

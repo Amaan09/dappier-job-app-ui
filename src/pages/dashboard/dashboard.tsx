@@ -44,7 +44,7 @@ const navigation = [
         icon: ChatBubbleLeftRightIcon,
     },
 ];
-const userNavigation = [{ name: "Sign out" }];
+const userNavigation = [{ name: "Logout" }];
 
 function classNames(...classes: string[]) {
     return classes.filter(Boolean).join(" ");

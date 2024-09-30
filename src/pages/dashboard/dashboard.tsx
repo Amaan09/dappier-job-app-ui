@@ -56,6 +56,7 @@ export const Dashboard = ({ children }: AppChildrenProps) => {
 
     const logout = () => {
         setToken(null);
+        window.location.href = "/login";
     };
 
     return (

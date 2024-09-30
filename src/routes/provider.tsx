@@ -5,6 +5,7 @@ import { AppChildrenProps } from "../domain";
 interface IAuthContext {
     token: string | null,
     setToken: (token: string | null) => void;
+    isAuthenticated: () => boolean;
 }
 
 const AuthContext = createContext<IAuthContext | null>(null);
@@ -17,8 +18,11 @@ const AppProvider = ({ children }: AppChildrenProps) => {
         setToken_(token);
     }
 
-    useEffect(() => {
+    const isAuthenticated = () => {
+        return !!token; // Return true if token exists
+    };
 
+    useEffect(() => {
         if (token) {
             axios.defaults.headers.common["Authorization"] = `Bearer ${token}`;
             localStorage.setItem("user-access-token", token);
@@ -30,7 +34,7 @@ const AppProvider = ({ children }: AppChildrenProps) => {
     }, [token]);
 
     const contextValue = useMemo(
-        () => ({ token, setToken }),
+        () => ({ token, setToken, isAuthenticated }),
         [token]
     );
 
@@ -41,7 +45,15 @@ const AppProvider = ({ children }: AppChildrenProps) => {
 };
 
 export const useAuth = () => {
-    return useContext(AuthContext) ?? { token : null };
+    const context = useContext(AuthContext);
+    if (!context) {
+        return {
+            token: null,
+            setToken: () => { },
+            isAuthenticated: () => false
+        };
+    }
+    return context;
 }
 
 export default AppProvider;

@@ -4,9 +4,9 @@ import { useAuth } from "../provider";
 
 export const ProtectedRoute = ({ children }: AppChildrenProps) => {
 
-    const auth = useAuth() ?? { token: null };
+    const { isAuthenticated } = useAuth();
 
-    if (!auth?.token) {
+    if (isAuthenticated()) {
         return <Navigate to="/login" />
     } else {
         return children;

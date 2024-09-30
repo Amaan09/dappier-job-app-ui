@@ -1,4 +1,25 @@
+import { useForm, SubmitHandler } from "react-hook-form";
+import { NavLink, useNavigate } from "react-router-dom";
+import { LoginRequest } from "../../domain";
+import { login } from "../../api/auth-api";
+import { useAuth } from "../../routes/provider";
+
 export const Login = () => {
+    const { setToken } = useAuth();
+    const navigate = useNavigate();
+
+    const { register, handleSubmit } = useForm<LoginRequest>();
+
+    const onSubmit: SubmitHandler<LoginRequest> = async (request) => {
+        try {
+            const response = await login(request);
+            setToken(response.accessToken);
+            navigate("/dashboard");
+        } catch (error) {
+            console.log(error);
+        }
+    };
+
     return (
         <>
             <div className="min-h-full flex flex-col justify-center py-12 sm:px-6 lg:px-8">
@@ -15,7 +36,10 @@ export const Login = () => {
 
                 <div className="mt-8 sm:mx-auto sm:w-full sm:max-w-md">
                     <div className="bg-white py-8 px-4 shadow sm:rounded-lg sm:px-10">
-                        <form className="space-y-6" action="#" method="POST">
+                        <form
+                            className="space-y-6"
+                            onSubmit={handleSubmit(onSubmit)}
+                        >
                             <div>
                                 <label
                                     htmlFor="email"
@@ -25,6 +49,9 @@ export const Login = () => {
                                 </label>
                                 <div className="mt-1">
                                     <input
+                                        {...register("email", {
+                                            required: true,
+                                        })}
                                         id="email"
                                         name="email"
                                         type="email"
@@ -44,6 +71,9 @@ export const Login = () => {
                                 </label>
                                 <div className="mt-1">
                                     <input
+                                        {...register("password", {
+                                            required: true,
+                                        })}
                                         id="password"
                                         name="password"
                                         type="password"
@@ -57,12 +87,12 @@ export const Login = () => {
                             <div className="flex items-center justify-center">
                                 <div className="text-sm">
                                     Don't have an account?&nbsp;
-                                    <a
-                                        href="#"
+                                    <NavLink
+                                        to="/signup"
                                         className="font-medium text-indigo-600 hover:text-indigo-500"
                                     >
                                         Sign Up
-                                    </a>
+                                    </NavLink>
                                 </div>
                             </div>
 

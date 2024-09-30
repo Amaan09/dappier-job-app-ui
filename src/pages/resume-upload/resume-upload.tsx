@@ -1,5 +1,9 @@
+import { Layout } from "../../shared/layout";
+
 export const ResumeUpload = () => {
     return (
-        <h1>Hi, This is resume upload component.</h1>
-    )
-}
+        <Layout title="Upload Resume">
+            <p>This is the resume upload page of the chatbot.</p>
+        </Layout>
+    );
+};

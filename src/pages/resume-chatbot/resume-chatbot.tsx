@@ -1,5 +1,9 @@
+import { Layout } from "../../shared/layout";
+
 export const ResumeChatbot = () => {
     return (
-        <h1>This is resume chatbot!</h1>
-    )
+        <Layout title="Chatbot">
+            <p>This is the Chatbot page.</p>
+        </Layout>
+    );
 };

@@ -10,7 +10,7 @@ function authRequestInterceptor(config: InternalAxiosRequestConfig) {
 }
 
 export const client = Axios.create({
-  baseURL: process.env.VITE_BASE_URL
+  baseURL: import.meta.env.VITE_BASE_URL
 });
 
 client.interceptors.request.use(authRequestInterceptor);
@@ -23,7 +23,7 @@ client.interceptors.response.use(
 
     console.error(message);
 
-    if (error.response?.status === 401) {
+    if (error.response?.status === 401 && window.location.pathname !== '/login') {
       const searchParams = new URLSearchParams();
       const redirectTo = searchParams.get('redirectTo');
       window.location.href = `/login?redirectTo=${redirectTo}`;

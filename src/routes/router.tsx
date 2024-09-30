@@ -2,7 +2,7 @@ import {
   RouterProvider,
   createBrowserRouter,
 } from 'react-router-dom';
-import { ProtectedRoute } from '../protected-route';
+import { ProtectedRoute } from './helpers/protected-route';
 import { AppRoot } from './root';
 
 

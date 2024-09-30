@@ -6,7 +6,7 @@ export const ProtectedRoute = ({ children }: AppChildrenProps) => {
 
     const { isAuthenticated } = useAuth();
 
-    if (isAuthenticated()) {
+    if (!isAuthenticated()) {
         return <Navigate to="/login" />
     } else {
         return children;

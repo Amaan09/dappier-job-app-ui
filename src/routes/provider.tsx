@@ -4,7 +4,7 @@ import { AppChildrenProps } from "../domain";
 import { jwtDecode } from "jwt-decode";
 
 interface IAuthContext {
-    token: string | null,
+    token: string | null;
     setToken: (token: string | null) => void;
     isAuthenticated: () => boolean;
     userId: string | null;
@@ -13,13 +13,14 @@ interface IAuthContext {
 const AuthContext = createContext<IAuthContext | null>(null);
 
 const AppProvider = ({ children }: AppChildrenProps) => {
-
-    const [token, setToken_] = useState(localStorage.getItem("user-access-token"));
+    const [token, setToken_] = useState(
+        localStorage.getItem("user-access-token")
+    );
     const [userId, setUserId] = useState<string | null>(null);
 
     const setToken = (token: string | null) => {
         setToken_(token);
-    }
+    };
 
     const isAuthenticated = () => {
         return !!token; // Return true if token exists
@@ -36,7 +37,6 @@ const AppProvider = ({ children }: AppChildrenProps) => {
             localStorage.removeItem("user-access-token");
             setUserId(null);
         }
-
     }, [token]);
 
     const contextValue = useMemo(
@@ -44,10 +44,11 @@ const AppProvider = ({ children }: AppChildrenProps) => {
         [token, userId]
     );
 
-    return <AuthContext.Provider value={contextValue}>
-        {children}
-    </AuthContext.Provider>
-
+    return (
+        <AuthContext.Provider value={contextValue}>
+            {children}
+        </AuthContext.Provider>
+    );
 };
 
 export const useAuth = () => {
@@ -55,12 +56,12 @@ export const useAuth = () => {
     if (!context) {
         return {
             token: null,
-            setToken: () => { },
+            setToken: () => {},
             isAuthenticated: () => false,
-            userId: null
+            userId: null,
         };
     }
     return context;
-}
+};
 
 export default AppProvider;

@@ -4,30 +4,47 @@ import {
     createBrowserRouter,
 } from "react-router-dom";
 import { ProtectedRoute } from "./helpers/protected-route";
-import { AppRoot } from "./root";
+import { AuthRoute } from "./helpers/auth-route";
 
 const router = createBrowserRouter([
     {
         path: "/signup",
         lazy: async () => {
             const { Signup } = await import("../pages/auth/signup");
-            return { Component: Signup };
+            return {
+                Component: () => (
+                    <AuthRoute>
+                        <Signup />
+                    </AuthRoute>
+                ),
+            };
         },
     },
     {
         path: "/login",
         lazy: async () => {
             const { Login } = await import("../pages/auth/login");
-            return { Component: Login };
+            return {
+                Component: () => (
+                    <AuthRoute>
+                        <Login />
+                    </AuthRoute>
+                ),
+            };
         },
     },
     {
         path: "/dashboard",
-        element: (
-            <ProtectedRoute>
-                <AppRoot />
-            </ProtectedRoute>
-        ),
+        lazy: async () => {
+            const { AppRoot } = await import("./root");
+            return {
+                Component: () => (
+                    <ProtectedRoute>
+                        <AppRoot />
+                    </ProtectedRoute>
+                ),
+            };
+        },
         children: [
             {
                 path: "resume-upload",

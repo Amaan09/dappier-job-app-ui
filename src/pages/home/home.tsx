@@ -43,7 +43,8 @@ export const Home = () => {
                         {resumes.map((resume, index) => (
                             <tr key={index} className="hover:bg-gray-100">
                                 <td className="py-2 px-4 border-b">
-                                    {resume.fileName}
+                                    {resume.fileName.slice(0, 10)}...
+                                    {resume.fileName.slice(-9, -6)}.pdf
                                 </td>
                                 <td className="py-2 px-4 border-b">
                                     <a

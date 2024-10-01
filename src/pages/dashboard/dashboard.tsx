@@ -128,6 +128,10 @@ export const Dashboard = ({ children }: AppChildrenProps) => {
                                     <nav className="px-2 space-y-1">
                                         {navigation.map((item) => (
                                             <NavLink
+                                                onClick={() =>
+                                                    setSidebarOpen(false)
+                                                }
+                                                end
                                                 key={item.name}
                                                 to={item.to}
                                                 className={({ isActive }) =>

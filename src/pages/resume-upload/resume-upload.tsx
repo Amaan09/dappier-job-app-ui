@@ -1,4 +1,4 @@
-import { NavLink } from "react-router-dom";
+import { NavLink, useNavigate } from "react-router-dom";
 import { Layout } from "../../shared/layout";
 import { CreateResumeRequest } from "../../domain";
 import { SubmitHandler, useForm } from "react-hook-form";
@@ -22,6 +22,8 @@ export const ResumeUpload = () => {
     const [fileName, setFileName] = useState<string | null>(null);
     const [disable, setDisable] = useState<boolean>(false);
 
+    const navigate = useNavigate();
+
     const onSubmit: SubmitHandler<CreateResumeRequest> = async (request) => {
         if (!request.fileName || !request.fileUrl) {
             return;
@@ -41,6 +43,7 @@ export const ResumeUpload = () => {
                 theme: "light",
                 transition: Bounce,
             });
+            navigate("/dashboard");
             setDisable(false);
             setFileName(null);
             reset();

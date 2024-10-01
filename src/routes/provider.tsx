@@ -23,7 +23,25 @@ const AppProvider = ({ children }: AppChildrenProps) => {
     };
 
     const isAuthenticated = () => {
-        return !!token; // Return true if token exists
+        const token = localStorage.getItem("user-access-token");
+
+        if (!token) {
+            return false;
+        }
+
+        try {
+            const decodedToken = jwtDecode(token);
+            const currentTime = Math.floor(Date.now() / 1000);
+
+            if (decodedToken.exp && decodedToken.exp < currentTime) {
+                return false;
+            } else {
+                return true;
+            }
+        } catch (error) {
+            console.error("Error decoding token:", error);
+            return false;
+        }
     };
 
     useEffect(() => {

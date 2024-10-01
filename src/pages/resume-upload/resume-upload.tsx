@@ -6,8 +6,7 @@ import { DocumentTextIcon } from "@heroicons/react/24/outline";
 import { ChangeEvent, useState } from "react";
 import { uploadFile } from "../../api/file-upload-api";
 import { createResume } from "../../api/resume-api";
-import { Bounce, ToastContainer, toast } from "react-toastify";
-import "react-toastify/dist/ReactToastify.css";
+import { useToast } from "../../hooks/useToast";
 
 export const ResumeUpload = () => {
     const { register, handleSubmit, setValue, reset } =
@@ -18,6 +17,8 @@ export const ResumeUpload = () => {
                 jobDescription: undefined,
             },
         });
+
+    const openToast = useToast();
 
     const [fileName, setFileName] = useState<string | null>(null);
     const [disable, setDisable] = useState<boolean>(false);
@@ -32,34 +33,14 @@ export const ResumeUpload = () => {
         try {
             setDisable(true);
             await createResume(request);
-            toast.success("Data saved sucessfully!", {
-                position: "bottom-center",
-                autoClose: 5000,
-                hideProgressBar: false,
-                closeOnClick: true,
-                pauseOnHover: true,
-                draggable: true,
-                progress: undefined,
-                theme: "light",
-                transition: Bounce,
-            });
+            openToast("success", "Data saved successfully!");
             navigate("/dashboard");
             setDisable(false);
             setFileName(null);
             reset();
         } catch (error) {
             setDisable(false);
-            toast.error("Some error occured!", {
-                position: "bottom-center",
-                autoClose: 5000,
-                hideProgressBar: false,
-                closeOnClick: true,
-                pauseOnHover: true,
-                draggable: true,
-                progress: undefined,
-                theme: "light",
-                transition: Bounce,
-            });
+            openToast("error", "Error in saving data!");
             reset();
         }
     };
@@ -71,37 +52,16 @@ export const ResumeUpload = () => {
             setValue("fileName", response.fileName);
             setValue("fileUrl", response.path);
             setFileName(response.fileName);
-            toast.success("Resume uploaded sucessfully!", {
-                position: "bottom-center",
-                autoClose: 5000,
-                hideProgressBar: false,
-                closeOnClick: true,
-                pauseOnHover: true,
-                draggable: true,
-                progress: undefined,
-                theme: "light",
-                transition: Bounce,
-            });
+            openToast("success", "Resume uploaded sucessfully!");
             setDisable(false);
         } catch (error) {
             setDisable(false);
-            toast.error("Some error occured!", {
-                position: "bottom-center",
-                autoClose: 5000,
-                hideProgressBar: false,
-                closeOnClick: true,
-                pauseOnHover: true,
-                draggable: true,
-                progress: undefined,
-                theme: "light",
-                transition: Bounce,
-            });
+            openToast("error", "Some error occured!");
         }
     };
 
     return (
         <Layout title="Upload Resume">
-            <ToastContainer />
             <form
                 onSubmit={handleSubmit(onSubmit)}
                 className="space-y-8 divide-y divide-gray-200"

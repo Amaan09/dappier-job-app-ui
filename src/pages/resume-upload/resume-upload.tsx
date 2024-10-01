@@ -51,11 +51,11 @@ export const ResumeUpload = () => {
                 jobDescription: data.jobDescription,
                 fileUrl: data.fileUrl,
             });
-            openToast("success", "Data saved successfully!");
+            openToast("success", "Data saved successfully.");
             navigate("/dashboard");
         } catch (error) {
             setDisabled(false);
-            openToast("error", "Error in saving data!");
+            openToast("error", "Error in saving data.");
         }
     };
 
@@ -71,10 +71,10 @@ export const ResumeUpload = () => {
             setLoading(false);
             setDisabled(false);
             setFileResponse(response);
-            openToast("success", "Resume uploaded sucessfully!");
+            openToast("success", "File uploaded sucessfully.");
         } catch (error) {
             setDisabled(false);
-            openToast("error", "Some error occured!");
+            openToast("error", "Error in uploading the file.");
         }
     };
 

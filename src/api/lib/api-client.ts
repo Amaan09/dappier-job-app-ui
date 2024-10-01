@@ -10,7 +10,7 @@ function authRequestInterceptor(config: InternalAxiosRequestConfig) {
 }
 
 export const client = Axios.create({
-  baseURL: 'https://13.60.49.176/'
+  baseURL: 'https://amrul.in/'
 });
 
 client.interceptors.request.use(authRequestInterceptor);

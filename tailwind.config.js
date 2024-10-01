@@ -12,6 +12,9 @@ export default {
       },
     },
   },
+  variants: {
+    opacity: ({ after }) => after(['disabled'])
+  },
   plugins: [
     require('@tailwindcss/forms')
   ],

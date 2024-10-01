@@ -23,12 +23,6 @@ client.interceptors.response.use(
 
     console.error(message);
 
-    if (error.response?.status === 401 && window.location.pathname !== '/login') {
-      const searchParams = new URLSearchParams();
-      const redirectTo = searchParams.get('redirectTo');
-      window.location.href = `/login?redirectTo=${redirectTo}`;
-    }
-
     return Promise.reject(error);
   },
 );

@@ -48,7 +48,7 @@ export const Home = () => {
                                 <td className="py-2 px-4 border-b">
                                     <a
                                         href={resume.fileUrl}
-                                        className="text-blue-600 underline"
+                                        className="font-medium text-indigo-600 hover:text-indigo-500 underline"
                                         target="_blank"
                                         rel="noopener noreferrer"
                                     >

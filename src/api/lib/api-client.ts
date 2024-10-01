@@ -10,7 +10,7 @@ function authRequestInterceptor(config: InternalAxiosRequestConfig) {
 }
 
 export const client = Axios.create({
-  baseURL: 'http://ec2-13-60-49-176.eu-north-1.compute.amazonaws.com/'
+  baseURL: 'https://ec2-13-60-49-176.eu-north-1.compute.amazonaws.com/'
 });
 
 client.interceptors.request.use(authRequestInterceptor);

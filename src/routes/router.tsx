@@ -56,15 +56,6 @@ const router = createBrowserRouter([
                 },
             },
             {
-                path: "resume-chatbot-jobs",
-                lazy: async () => {
-                    const { ResumeChatbotJobs } = await import(
-                        "../pages/resume-chatbot-jobs/resume-chatbot-jobs"
-                    );
-                    return { Component: ResumeChatbotJobs };
-                },
-            },
-            {
                 path: "resume-chatbot",
                 lazy: async () => {
                     const { ResumeChatbot } = await import(

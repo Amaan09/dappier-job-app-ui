@@ -10,7 +10,7 @@ function authRequestInterceptor(config: InternalAxiosRequestConfig) {
 }
 
 export const client = Axios.create({
-  baseURL: 'https://amrul.in/'
+  baseURL: import.meta.env.VITE_BASE_URL
 });
 
 client.interceptors.request.use(authRequestInterceptor);

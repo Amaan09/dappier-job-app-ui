@@ -11,7 +11,7 @@ export const AppRoot = () => {
             <Suspense
                 fallback={
                     <div className="flex size-full items-center justify-center">
-                        <Loader />
+                        <Loader size="Medium" />
                     </div>
                 }
             >

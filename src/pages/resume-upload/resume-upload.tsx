@@ -27,6 +27,7 @@ export const ResumeUpload = () => {
             fileUrl: undefined,
             jobDescription: undefined,
             file: undefined,
+            nickName: undefined,
         },
     });
 
@@ -35,7 +36,6 @@ export const ResumeUpload = () => {
     const [fileResponse, setFileResponse] = useState<FileUploadResponse | null>(
         null
     );
-    const [loading, setLoading] = useState<boolean>(false);
     const [disabled, setDisabled] = useState<boolean>(false);
 
     const navigate = useNavigate();
@@ -50,25 +50,30 @@ export const ResumeUpload = () => {
                 fileName: data.fileName,
                 jobDescription: data.jobDescription,
                 fileUrl: data.fileUrl,
+                nickName: data.nickName,
             });
-            openToast("success", "Data saved successfully.");
-            navigate("/dashboard");
+            openToast(
+                "success",
+                "AI model trained successfully with the provided resume."
+            );
+            navigate("/dashboard/resume-chatbot");
         } catch (error) {
             setDisabled(false);
-            openToast("error", "Error in saving data.");
+            openToast(
+                "error",
+                "Error in training the AI model with the provided resume. Please try again!"
+            );
         }
     };
 
     const handleUploadFile = async (event: ChangeEvent<HTMLInputElement>) => {
         setDisabled(true);
-        setLoading(true);
         setFileResponse(null);
         try {
             const response = await uploadFile(event.target.files?.[0] ?? "");
             setValue("fileName", response.fileName);
             setValue("fileUrl", response.path);
             trigger("file");
-            setLoading(false);
             setDisabled(false);
             setFileResponse(response);
             openToast("success", "File uploaded sucessfully.");
@@ -85,6 +90,7 @@ export const ResumeUpload = () => {
 
     return (
         <Layout title="Upload Resume">
+            {disabled && <Loader fixed={true} size="Large" />}
             <form
                 onSubmit={handleSubmit(onSubmit)}
                 className="space-y-8 divide-y divide-gray-200"
@@ -94,17 +100,42 @@ export const ResumeUpload = () => {
                         <p className="mt-1 text-sm text-gray-500">
                             Please upload the resume of the candidate and enter
                             the job description to train the model. Once you
-                            save the changes, the data is sent is sent to the
-                            model for training, which can be tracked&nbsp;
+                            save the changes, the data is trained to the model
+                            and after training you can use the model{" "}
                             <NavLink
                                 className="font-medium text-indigo-600 hover:text-indigo-500"
-                                to="/dashboard/resume-chatbot-jobs"
+                                to="/dashboard/resume-chatbot"
                             >
                                 here.
                             </NavLink>
                         </p>
 
                         <div className="mt-6 grid grid-cols-1 gap-y-6 gap-x-4 sm:grid-cols-6">
+                            <div className="sm:col-span-6">
+                                <label
+                                    htmlFor="nickName"
+                                    className="block text-sm font-medium text-gray-700"
+                                >
+                                    Nickname
+                                </label>
+
+                                <div className="mt-1">
+                                    <input
+                                        {...register("nickName", {
+                                            required: "Nick name is required.",
+                                        })}
+                                        type="nickName"
+                                        placeholder="Give a nickname to this chatbot."
+                                        className="appearance-none block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm placeholder-gray-400 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
+                                    />
+                                </div>
+
+                                {errors.nickName && (
+                                    <p className="mt-1 text-xs text-red-600">
+                                        {errors.nickName.message}
+                                    </p>
+                                )}
+                            </div>
                             <div className="sm:col-span-6">
                                 <label
                                     htmlFor="cover-photo"
@@ -155,7 +186,6 @@ export const ResumeUpload = () => {
                                         </a>
                                     </p>
                                 )}
-                                {loading && <Loader />}
                                 {errors.file && (
                                     <p className="mt-1 text-xs text-red-600">
                                         {errors.file.message}
@@ -206,7 +236,7 @@ export const ResumeUpload = () => {
                             type="submit"
                             className="ml-3 inline-flex justify-center py-2 px-4 border border-transparent shadow-sm text-sm font-medium rounded-md text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 disabled:opacity-20"
                         >
-                            Save
+                            Train & Save
                         </button>
                     </div>
                 </div>

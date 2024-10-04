@@ -1,3 +1,3 @@
 export interface AppChildrenProps {
-    children: React.ReactNode;
+    children?: React.ReactNode;
 }

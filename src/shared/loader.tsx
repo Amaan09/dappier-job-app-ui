@@ -1,9 +1,26 @@
-export const Loader = () => {
+import { LoaderProps } from "../domain";
+
+export const Loader = ({ size, fixed }: LoaderProps) => {
+    const sizes = {
+        Small: "w-6 h-6",
+        Medium: "w-10 h-10",
+        Large: "w-16 h-16",
+    };
+
+    const loaderClass = `inline ${sizes[size]} mt-2 text-gray-200 animate-spin dark:text-gray-600 fill-purple-600`;
+
     return (
-        <div role="status">
+        <div
+            role="status"
+            className={
+                fixed
+                    ? "fixed inset-0 z-50 flex items-center justify-center bg-black bg-opacity-50"
+                    : ""
+            }
+        >
             <svg
                 aria-hidden="true"
-                className="inline w-6 h-6 mt-2 text-gray-200 animate-spin dark:text-gray-600 fill-purple-600"
+                className={loaderClass}
                 viewBox="0 0 100 101"
                 fill="none"
                 xmlns="http://www.w3.org/2000/svg"

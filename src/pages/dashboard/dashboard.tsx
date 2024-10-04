@@ -16,7 +16,6 @@ import {
     Bars3Icon,
     UserCircleIcon,
     DocumentArrowUpIcon,
-    PresentationChartLineIcon,
     ChatBubbleLeftRightIcon,
 } from "@heroicons/react/24/outline";
 import { NavLink } from "react-router-dom";
@@ -32,11 +31,6 @@ const navigation = [
         name: "Upload Resume",
         to: "/dashboard/resume-upload",
         icon: DocumentArrowUpIcon,
-    },
-    {
-        name: "Chatbot Training Status",
-        to: "/dashboard/resume-chatbot-jobs",
-        icon: PresentationChartLineIcon,
     },
     {
         name: "Chatbot",

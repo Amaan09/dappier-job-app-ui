@@ -6,7 +6,7 @@ import { DocumentTextIcon } from "@heroicons/react/24/outline";
 import { ChangeEvent, useState } from "react";
 import { uploadFile } from "../../api/file-upload-api";
 import { createResume } from "../../api/resume-api";
-import { useToast } from "../../hooks/user-toast";
+import { useToast } from "../../hooks/use-toast";
 import { Loader } from "../../shared/loader";
 
 interface ResumeForm extends CreateResumeRequest {

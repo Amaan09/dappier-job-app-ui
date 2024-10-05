@@ -9,8 +9,8 @@ export const ChatBubble = ({ children, type, isDefault }: ChatBubbleProps) => {
 
     const styles =
         type === PROMPT_TYPES.AI
-            ? "relative max-w-xl rounded-xl rounded-tl-none px-4 py-2 bg-gray-100"
-            : "relative max-w-xl rounded-xl rounded-tl-none text-white px-4 py-2 bg-indigo-600";
+            ? "relative max-w-3xl rounded-xl rounded-tl-none px-4 py-2 bg-gray-100 whitespace-pre-wrap"
+            : "relative max-w-3xl rounded-xl rounded-tl-none text-white px-4 py-2 bg-indigo-600";
 
     return (
         <div className="flex my-8">

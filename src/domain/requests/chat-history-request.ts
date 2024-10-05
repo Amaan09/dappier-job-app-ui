@@ -1,4 +1,4 @@
-export interface ChatHistory {
+export interface ChatHistoryRequest {
     userPrompt: string;
 
     aiPrompt: string;

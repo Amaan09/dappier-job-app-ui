@@ -1,5 +1,6 @@
-import { CreateResumeRequest } from "../domain";
+import { ChatCompletionResponse, CreateResumeRequest } from "../domain";
 import { Resume } from "../domain/entities";
+import { ChatCompletionRequest } from "../domain/requests/chat-completion-request";
 import { client } from "./lib/api-client";
 
 export const createResume = (request: CreateResumeRequest): Promise<Resume> => {
@@ -8,4 +9,8 @@ export const createResume = (request: CreateResumeRequest): Promise<Resume> => {
 
 export const getAllResumes = (): Promise<Resume[]> => {
     return client.get('resume');
+}
+
+export const chatCompletion = (request: ChatCompletionRequest): Promise<ChatCompletionResponse> => {
+    return client.post('resume/chat-completion', request);
 }

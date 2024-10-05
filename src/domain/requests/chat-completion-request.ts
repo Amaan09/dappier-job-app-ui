@@ -1,12 +1,12 @@
 import { SearchQueryType } from "../constants";
-import { ChatHistory } from "./chat-history-request";
+import { ChatHistoryRequest } from "./chat-history-request";
 
 export interface ChatCompletionRequest {
     userPrompt: string;
 
     namespaceId: string;
 
-    chatHistory: ChatHistory[];
+    chatHistory: ChatHistoryRequest[];
 
     searchQuery?: SearchQueryType;
 }

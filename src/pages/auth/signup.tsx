@@ -3,7 +3,7 @@ import { NavLink, useNavigate } from "react-router-dom";
 import { signUp } from "../../api/auth-api";
 import { SignupRequest } from "../../domain";
 import { useAuth } from "../../routes/provider";
-import { useToast } from "../../hooks/useToast";
+import { useToast } from "../../hooks/user-toast";
 import { useState } from "react";
 
 export const Signup = () => {

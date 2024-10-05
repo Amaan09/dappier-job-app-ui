@@ -4,7 +4,7 @@ import { LoginRequest } from "../../domain";
 import { login } from "../../api/auth-api";
 import { useAuth } from "../../routes/provider";
 import { useState } from "react";
-import { useToast } from "../../hooks/useToast";
+import { useToast } from "../../hooks/user-toast";
 
 export const Login = () => {
     const { setToken } = useAuth();

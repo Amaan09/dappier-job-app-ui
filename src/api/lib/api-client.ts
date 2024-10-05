@@ -25,6 +25,7 @@ client.interceptors.response.use(
 
     if (error.response?.status === 401 && window.location.pathname !== '/login') {
       window.location.href = `/login`;
+      sessionStorage.clear();
     }
 
     return Promise.reject(error);

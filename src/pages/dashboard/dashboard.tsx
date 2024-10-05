@@ -50,6 +50,7 @@ export const Dashboard = ({ children }: AppChildrenProps) => {
 
     const logout = () => {
         setToken(null);
+        sessionStorage.clear();
         window.location.href = "/login";
     };
 

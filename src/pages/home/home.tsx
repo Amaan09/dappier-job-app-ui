@@ -1,20 +1,17 @@
 import { useEffect, useState } from "react";
 import { Layout } from "../../shared/layout";
-import { Resume, User } from "../../domain/entities";
-import { getCurrentUser } from "../../api/user-api";
+import { Resume } from "../../domain/entities";
 import { getAllResumes } from "../../api/resume-api";
+import { UserWelcome } from "./components/user-welcome";
 
 export const Home = () => {
-    const [user, setUser] = useState<User | null>(null);
     const [resumes, setResumes] = useState<Resume[]>([]);
 
     useEffect(() => {
         const fetchData = async () => {
             try {
-                const response = await getCurrentUser();
-                const allResumes = await getAllResumes();
-                setUser(response);
-                setResumes(allResumes);
+                const response = await getAllResumes();
+                setResumes(response);
             } catch (error) {
                 console.error("Error fetching data:", error);
             }
@@ -25,15 +22,14 @@ export const Home = () => {
 
     return (
         <Layout title="Dashboard">
-            {user && <h1>Hello, {user.name} 👋. Welcome to the dashboard. </h1>}
-
+            <UserWelcome />
             <div className="overflow-x-auto mt-4">
                 <table className="min-w-full bg-white border border-gray-300">
                     <thead>
                         <tr className="bg-gray-200 text-gray-700">
                             <th className="py-2 px-4 border-b">File Name</th>
                             <th className="py-2 px-4 border-b">File URL</th>
-                            <th className="py-2 px-4 border-b">User ID</th>
+
                             <th className="py-2 px-4 border-b">
                                 Job Description
                             </th>
@@ -57,10 +53,7 @@ export const Home = () => {
                                     </a>
                                 </td>
                                 <td className="py-2 px-4 border-b">
-                                    {resume.userId}
-                                </td>
-                                <td className="py-2 px-4 border-b">
-                                    {resume.jobDescription}
+                                    {resume.jobDescription.slice(0, 100)}...
                                 </td>
                             </tr>
                         ))}

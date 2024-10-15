@@ -2,6 +2,10 @@
 
 Welcome to the Dappier Job Application UI repository. This repository houses the user interface for an integrated application designed to enhance the job application process by allowing users to upload resumes and job descriptions. Utilizing a RAG (Retrieval-Augmented Generation) model, it provides insightful feedback and generates potential interview questions. Our goal is to facilitate seamless and user-friendly interaction with the backend API and the RAG model.
 
+
+![image](https://github.com/user-attachments/assets/0151b0b5-280a-4869-9681-8556194f386f)
+
+
 ## Table of Contents
 
 - [Overview](#overview)

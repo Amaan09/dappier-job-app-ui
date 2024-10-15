@@ -137,7 +137,14 @@ Ensure you have the following installed:
    npm install
    ```
 
-3. Set up environment variables by creating a `.env` file in the root and filling with necessary configurations, e.g., API endpoints.
+3. Set up environment variables:
+
+   Create a `.env` file in the root directory of the project. You can define your environment variables here. For local development, you might include:
+
+   ```env
+   # API Base URL Configuration
+   VITE_BASE_URL=http://localhost:8080/
+   ```
 
 ### Usage
 

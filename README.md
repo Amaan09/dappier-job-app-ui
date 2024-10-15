@@ -1,6 +1,6 @@
 # Dappier Job Application UI
 
-Welcome to the Dappier Job Application UI repository. This is a user interface for an integrated application that allows users to upload resumes and job descriptions. The application utilizes a RAG (Retrieval-Augmented Generation) model to provide feedback or generate questions based on the uploaded documents. The main purpose of this UI is to make the user interaction with the backend API and RAG model seamless and user-friendly.
+Welcome to the Dappier Job Application UI repository. This repository houses the user interface for an integrated application designed to enhance the job application process by allowing users to upload resumes and job descriptions. Utilizing a RAG (Retrieval-Augmented Generation) model, it provides insightful feedback and generates potential interview questions. Our goal is to facilitate seamless and user-friendly interaction with the backend API and the RAG model.
 
 ## Table of Contents
 
@@ -22,10 +22,11 @@ This project is a part of a larger application structure:
 
 ## Features
 
-- **File Upload**: Easily upload resumes and job descriptions.
-- **Feedback Generation**: Get instant feedback on how well you have answered to a resume or job description based question.
-- **Question Generation**: Receive AI-generated questions for interview preparation.
-- **User-Friendly Interface**: An intuitive and easy-to-use interface for an efficient user experience.
+- **File Upload & Management:** Simplified upload process for resumes and job descriptions with a comprehensive dashboard to view all uploads.
+- **Feedback & Question Generation:** Immediate AI-driven feedback and question generation for interview preparation based on uploaded documents.
+- **User Authentication:** Secure JWT-based login and signup system with token management and automatic redirection on token expiry.
+- **Responsive Chatbot UI:** Interactive and responsive chatbot interface supporting both desktop and mobile with chat history management.
+- **Form Validation & Notifications:** Robust form validation across all user inputs with integrated toaster notifications for success and error messages.
 
 ## Project Structure
 ```
